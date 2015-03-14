@@ -1,8 +1,8 @@
 ## Submit Form without Page Refresh with jQuery AJAX
 
-Ajax is a JavaScript based web development technology used for building asynchronous application. Ajax can send and receive date in the background (without page refreshing or redirecting). We need to use XMLHttpRequest object for working with ajax but jQuery library made it more easy to working with ajax by using jQuery.ajax, jQuery.get, jQuery.post methods.
+Ajax is a JavaScript based web development technology used for building asynchronous application. Ajax can send and receive date in the background (without page refreshing or redirecting). We need to use `XMLHttpRequest` object for working with ajax but jQuery library made it more easy to working with ajax by using `jQuery.ajax`, `jQuery.get`, `jQuery.post` methods.
 
-In this post I have a simple html contact us form example that takes information(name, email, subject and message) from user. When user submit the form data send asynchronously to the server. PHP receives XMLHttpRequest request and process data from server side.
+In this post I have a simple html contact us form example that takes information(name, email, subject and message) from user. When user submit the form data send asynchronously to the server. PHP receives `XMLHttpRequest` request and process data from server side.
 
 ####HTML Markup
 Let's take a look at html markup. We have a basic html contact us form
