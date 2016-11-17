@@ -1,0 +1,107 @@
+<html lang="en" >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="angular-material.min.css">
+  
+  <style type="text/css">
+		#right { margin:20px; padding:20px; border:1px solid; background:#ccc; }
+		#left { margin:20px; padding:20px; height:320px; border:1px solid; background:#ccc; }
+		form { margin-top: 15px; padding:20px; }
+		h2, h3 { margin-top:0; }
+	</style>
+  
+  <!-- First, include the Webcam.js JavaScript Library -->
+  <script type="text/javascript" src="webcam.js"></script>
+	  
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script type="text/javascript" src="angular.min.js"></script>
+  <script type="text/javascript" src="angular-animate.min.js"></script>
+  <script type="text/javascript" src="angular-aria.min.js"></script>
+  <script type="text/javascript" src="angular-messages.min.js"></script>
+  
+  <!-- Angular Material Library -->
+  <script type="text/javascript" src="angular-material.min.js"></script>
+  
+  <script type="text/javascript" src="camera.js"></script>
+
+</head>
+<body id="body" ng-app="CamApp" ng-controller="AppController" ng-cloak>
+  <div layout="column" layout-padding>
+  <div layout="row" layout-xs="column" layout-align="center center">
+  <h2>Swipe In/Out Recorder</h2>
+  </div>
+  <div layout="row" layout-xs="column">
+	<div id="left" flex="40" layout-align="center">
+	    <div id="my_camera"></div>
+		
+	</div>
+	<div flex="20" layout="column" layout-align="space-around center">
+			
+			<md-button class="md-raised md-primary" onClick="webcam_start()">Start</md-button>
+			<md-button class="md-raised md-warn" onClick="webcam_stop()">Stop</md-button>
+			<input type=button ng-show="0" value="getEMP" ng-click="getEMP(532789)">
+			<input type=text ng-if="0" ng-model="empid" placeholder="Emp ID">
+			<md-input-container md-no-float class="md-block">
+				<input ng-model="empid" placeholder="Empoyee ID">
+			</md-input-container>
+			<md-button class="md-raised md-accent" onClick="take_snapshot()">Take Snapshot</md-button>
+			<input ng-show="0" type=button value="Take Snapshot" onClick="take_snapshot()">
+			<a href="lookalike.html">LookALike</a>
+		
+    
+	</div>
+	<div id="right" flex="40" layout-align="center center">
+		<div id="snapshot">Your captured image will appear here...</div>
+    
+	</div>
+  </div>
+  <div layout="row" layout-xs="column" layout-align="center center">
+  <h3 ng-bind="msg"></h3>
+  </div>
+  </div>
+  
+	
+  
+  
+	<!-- Configure a few settings and attach camera -->
+	<script language="JavaScript">
+		Webcam.set({
+			width: 320,
+			height: 240,
+			image_format: 'jpeg',
+			jpeg_quality: 90
+		});
+		
+		function webcam_start(){
+			Webcam.attach( '#my_camera' );
+		}
+		
+		function webcam_stop(){
+			Webcam.reset();
+		}
+		
+		function take_snapshot() {
+			// take snapshot and get image data
+			Webcam.snap( function(data_uri) {
+				// display results in page
+				document.getElementById('snapshot').innerHTML = 
+					'<h3>Here is your image:</h3>' + 
+					'<img src="'+data_uri+'"/>';
+				var scope = angular.element(document.getElementById('body')).scope();
+				//var image = new Image();
+				//image.src = ''+data_uri;
+				//var image = dataURItoBlob(data_uri);
+				//scope.Detect(image);
+				scope.Process(data_uri);
+			} );
+		}
+	</script>
+  
+</body>
+</html>
+
+<!--
+Copyright 2016 Google Inc. All Rights Reserved. 
+Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.
+-->
