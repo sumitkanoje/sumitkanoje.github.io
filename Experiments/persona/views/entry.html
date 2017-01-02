@@ -1,0 +1,12 @@
+
+<div ng-bind-html="status" layout="row" layout-align="center end"></div>
+
+<div flex layout="row" layout-sm="column" layout-align="center center" layout-fill>
+        <md-button class="md-fab entry" aria-label="Inward Entry" ng-click="showAdvanced($event,'IN')">
+            <md-icon md-svg-src="assets/svg/filed.svg" class="s48"></md-icon>
+        </md-button>
+
+        <md-button class="md-fab md-primary" aria-label="Outward Entry" ng-click="showAdvanced($event,'OUT')">
+          <md-icon md-svg-src="assets/svg/fileu.svg"></md-icon>
+        </md-button>
+</div>
