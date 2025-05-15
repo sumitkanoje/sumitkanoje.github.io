@@ -26,4 +26,9 @@ jobs:
           restore-keys: |
             mkdocs-material-
       - run: pip install mkdocs-material 
+      - name: Copy files to projects
+        run: |
+          mkdir -p /docs/projects
+          cp -r projects/* /docs/projects/
+          cp -r persona /docs/projects/persona
       - run: mkdocs gh-deploy --force

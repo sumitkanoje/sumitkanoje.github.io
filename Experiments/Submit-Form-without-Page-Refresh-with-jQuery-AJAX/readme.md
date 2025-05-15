@@ -109,5 +109,3 @@ function email($to, $from_mail, $from_name, $subject, $message){
   if( mail($to, $subject, $message, implode("\r\n", $header)) ) return true; 
 }
 ```
-
-Original Post by [Resalat Haque](http://www.w3bees.com/2013/08/submit-form-without-page-refresh-with.html)  

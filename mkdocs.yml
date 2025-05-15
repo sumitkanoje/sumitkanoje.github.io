@@ -1,0 +1,91 @@
+site_name: sumitkanoje.github.io
+site_url: https://sumitkanoje.github.io
+site_author: Sumit Kanoje
+site_description: >-
+  A personal website and blog of Sumit Kanoje, a software engineer and
+  technology enthusiast.
+
+copyright: >
+  Copyright © 2023 Sumit Kanoje. All rights reserved.
+
+repo_url: https://github.com/sumitkanoje/
+repo_name: sumitkanoje.github.io
+
+theme:
+  name: material
+  palette:
+    scheme: default
+    primary: light-blue
+    toggle:
+      icon: material/toggle-switch
+      name: Switch between light and dark mode
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.tabs.elevation
+    - navigation.instant
+    - navigation.expand
+    - navigation.top
+    - navigation.sections
+    - navigation.tracking
+    - navigation.search.highlight
+    - navigation.search.suggest
+    - navigation.search.share
+    - navigation.search.suggest
+    - navigation.search.share
+    - navigation.search.highlight
+    - navigation.search.suggest
+    - navigation.search.share
+
+# Additional configuration
+extra:
+  consent:
+    title: Cookie consent
+    description: >-
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+
+  analytics:
+    provider: google
+    property: G-
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/thumb-up-outline
+          name: this page was helpful
+          data: 1
+          note: >-
+            Thanks for your feedback!
+        - icon: material/thumb-down-outline
+          name: This page could be improved
+          data: 0
+          note: >-
+            Thanks for your feedback! Help us improve this page by
+
+  social:
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/sumitkanoje/
+    - icon: fontawesome/brands/github
+      link: https://github.com/sumitkanoje
+    - icon: fontawesome/brands/medium
+      link: https://medium.com/@humanspeaksai
+
+# Plugins
+plugins:
+  - blog
+  - search
+
+nav:
+  - Home: index.md
+  - Blogs:
+      - blog/index.md
+  - Projects:
+      - project.md
+      - Persona: projects/persona/
+      - Project 1: projects/project1/
+      - Project 2: projects/project2.md
+  - About: about.md
+  - Privacy: privacy.md
+
