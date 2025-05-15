@@ -1,0 +1,41 @@
+<div flex layout-fill>
+    <form name="FormUsers" class="form-inline">
+		
+        <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="row-border hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Entry</th>
+                <th>IV No</th>
+                <th>RV No</th>
+                <th>Date</th>
+                <th>Head</th>
+                <th>Action</th>
+                <th ng-hide="auth.role!='ADMIN'">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="bill in showCase.bills">
+                <td>{{ $index+1 }}</td>
+                <td>{{ bill.type }}</td>
+                <td>{{ bill.from1 }}</td>
+                <td>{{ bill.to1 }}</td>
+                <td>{{ bill.to4 }}</td>
+                <td>{{ bill.from4 }}</td>
+                <td>
+                    <a ng-if="bill.type=='IN'" class="btn btn-primary btn-xs" href="http://localhost/imsui/api/print/ran/{{bill.id}}" target="_blank">
+                    <i class="glyphicon glyphicon-print"></i> RAN</a>
+                    <a ng-if="bill.type=='IN'" class="btn btn-success  btn-xs" href="http://localhost/imsui/api/print/crv/{{bill.id}}" target="_blank">
+                    <i class="glyphicon glyphicon-print"></i> CRV</a>
+                    <a ng-if="bill.type=='OUT'" class="btn btn-info btn-xs" href="http://localhost/imsui/api/print/iv/{{bill.id}}" target="_blank">
+                    <i class="glyphicon glyphicon-print"></i> IV</a>
+                 </td>
+                 <td ng-hide="auth.role!='ADMIN'">
+                    <a class="btn btn-danger btn-xs" ng-click="showCase.removebill($index,bill)">
+                    <i class="glyphicon glyphicon-trash"></i> Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

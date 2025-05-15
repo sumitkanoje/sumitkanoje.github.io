@@ -1,0 +1,10 @@
+<md-toolbar layout="row">
+	<md-button ng-if="auth" class="menu" ng-click="toggleLeft()" aria-label="Show User List">
+	<md-icon md-svg-icon="menu" ></md-icon>
+	</md-button>
+	<span flex></span>
+	<h1><span>Prospect Dashboard</span></h1>
+	<span flex></span>
+	<md-button ng-if="auth" class="menu" ng-click="logout()" aria-label="Logout">
+	<md-icon md-svg-icon="exit" ></md-icon> </md-button>     
+</md-toolbar>

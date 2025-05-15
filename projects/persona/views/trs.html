@@ -1,0 +1,28 @@
+<h1 ng-hide="1">Transactions</h1>
+
+
+<table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="row-border hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Tr ID</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Entry Type</th>
+                <th>Unit</th>
+                <th>Qty</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="inv in showCase.trs">
+                <td>{{ $index+1 }}</td>
+                <td>{{ inv.bill_id }}</td>
+                <td>{{ inv.name }}</td>
+                <td>{{ inv.date }}</td>
+                <td>{{ inv.type }}</td>
+                <td>{{ inv.unit }}</td>
+                <td>{{ inv.qty }}</td>
+            </tr>
+            </tbody>
+        </table>
+        
