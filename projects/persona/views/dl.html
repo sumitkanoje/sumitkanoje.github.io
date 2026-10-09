@@ -1,0 +1,56 @@
+<h1 ng-hide="1">Distrinution</h1>
+
+<div layout="column" layout-sm="column" flex>
+	<div layout="row" layout-align="center center">
+		<md-autocomplete flex="30"
+           			md-selected-item="showCase.selectedItem"
+           			md-selected-item-change="showCase.getDl(item)"
+            		md-search-text="searchText"
+            		md-items="item in showCase.querySearch(searchText)"
+            		md-item-text="item.name"
+            		md-min-length="0"
+            		md-no-cache="true"
+            		placeholder="What is the name of Inventory?">
+          			<md-item-template>
+            		<span md-highlight-text="searchText" md-highlight-flags="^i">{{item.name}}</span>
+          			</md-item-template>
+          			<md-not-found>
+            			No match for "{{searchText}}"
+          			</md-not-found>
+        </md-autocomplete>
+     </div>
+    	
+	<div ng-if="0" layout="row" layout-align="center center">
+	<md-input-container flex="30">
+		<label>Item Name</label>
+		<md-select ng-model="selectedInv" ng-change="showCase.getDl(selectedInv)" name="role" required>
+       		<md-option ng-repeat="inv in showCase.invs" ng-value="inv">
+        		{{inv.name}}
+       		</md-option>
+     	</md-select>
+     </md-input-container>
+     </div>
+     
+     <div layout="row" fex>
+     <h1></h1>
+     </div>
+     
+     <div ng-hide="!dls" layout="row" fex>
+  		<div layout="column" flex>
+  			<div flex><strong>Name</strong></div>
+  			<div flex>{{dls[0].name}}</div>
+  		</div>
+  		<div ng-repeat="dl in dls" layout="column" flex>
+  			<div flex><strong>{{dl.unit=='NA' ? 'Total' : dl.unit}}</strong></div>
+  			<div flex>{{dl.item_qty}}</div>
+  		</div>
+  		<div layout="column" flex>
+  			<div flex><strong>Available</strong></div>
+  			<div flex>{{dls[0].REM}}</div>
+  		</div>
+  		
+  	</div>
+  	
+  	
+     
+</div>

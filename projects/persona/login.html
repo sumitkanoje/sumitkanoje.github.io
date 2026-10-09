@@ -1,0 +1,18 @@
+<div flex layout="row" layout-align="center center">
+	<md-whiteframe class="md-whiteframe-z1" layout="column" layout-padding flex="25">
+		<md-input-container>
+			<label>Username</label>
+			<input ng-model="user.username">
+		</md-input-container>
+		<md-input-container>
+			<label>Password</label>
+			<input ng-model="user.password" type="password">
+		</md-input-container>
+		<md-input-container layout-align="center center">
+			<div layout="row" layout-sm="column" layout-margin>
+				<md-button class="md-raised md-primary" ng-click="Ctrl.login(user.username,user.password)">Login</md-button>
+				<md-button ng-if="1==0" class="md-raised md-primary" ng-click="SharedFactory.login(user.username,user.password)">Login Again</md-button>
+			</div>
+		</md-input-container>
+	</md-whiteframe>
+</div>
