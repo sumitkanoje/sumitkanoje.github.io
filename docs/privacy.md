@@ -3,6 +3,7 @@
 This page holds the privacy policies for apps published by knoje. Each app has its own section:
 
 - [UAE Wealth Tracker](#uae-wealth-tracker) (Android, `com.knoje.uaewealth`)
+- [DoorBook](#doorbook) (Android and iOS, `com.knoje.qatra`)
 - [Knoje Virtual Speaker and other apps](#knoje-virtual-speaker-and-other-apps)
 
 ---
@@ -159,6 +160,179 @@ If the app ever changes how it handles data (for example if an optional cloud sy
 
 **[CONTACT EMAIL]**
 [WEBSITE, optional]
+
+---
+
+## DoorBook
+
+**Effective date:** 29 October 2026  
+**App:** DoorBook (Android package and iOS bundle id `com.knoje.qatra`), shown in the app as "DoorBook" / «دور بوك»  
+**Developer:** knoje  
+**Contact:** contact@knoje.com
+
+DoorBook ("the app", "we") is a delivery book for people who deliver drinking water in the United Arab
+Emirates ("drivers") and for the customers they serve. This policy explains what the app stores, where
+it is stored, who can see it and how you can delete it.
+
+**DoorBook is an independent app. It is not affiliated with or endorsed by any water company.** Company names
+appear in the app as plain text only, chosen by the driver.
+
+### In short
+
+- Your data lives on your phone, in an encrypted database.
+- Messages between a driver and a customer pass through our relay server **end-to-end encrypted**. The server
+  cannot read them. It sees only device ids and timestamps.
+- The relay also keeps, per install, a **push token** (to wake your phone when a message is waiting).
+- Optional backups, for drivers and customers, go to your own Google Drive or iCloud, never to our servers.
+- No account, no name and no phone number are needed to use the app. Customers are never asked for a phone number,
+  and there is no SMS or other verification.
+- **No ads, no analytics, no tracking, no selling or sharing of data.**
+- Customers can withdraw consent or delete all their data at any time, and that also deletes the copies held
+  by their drivers.
+
+### 1. Data stored on your phone
+
+Everything you enter stays on your device, in a database encrypted with SQLCipher (AES-256). The encryption
+key is kept in the phone's secure keystore (Android Keystore or iOS Keychain). The database is excluded from
+the operating system's own cloud backups.
+
+**Drivers** store their own delivery book: display name and company label, warehouse location, customers'
+delivery locations (map pin, building, tower or wing, floor, apartment, landmark note), an optional phone
+number for calling at the door, nicknames, notes, requests, routes, weekly schedules, coupon types, issued and
+redeemed coupons, optional "amount collected" figures, and chat messages.
+
+**Customers** store their consent record (date, consent text version and a fingerprint of the exact text),
+their links to drivers, their requests, coupons and deliveries, chat messages and, only if they add it, their name.
+The app does not collect a customer's phone number. (A driver may type a customer's phone number into their own
+delivery book for calling at the door; it stays on the driver's phone and in the driver's own backup.)
+
+Each install also creates a cryptographic identity (signing and encryption key pairs). The private keys never
+leave the phone, except inside the user's optional backup in their own cloud account (section 5).
+
+### 2. The relay server
+
+Phones cannot reach each other directly, so the app uses a small relay server that we operate on Cloudflare
+(Cloudflare Workers with a D1 database, plus Cloudflare's built-in Workers rate limiting). There is no other
+storage: no file storage (R2) and no key-value store (KV). The relay:
+
+- **Passes messages on.** Requests, confirmations, coupon records, chat messages and delete notices are
+  encrypted on the sending phone for the receiving phone only (X25519 + AES-256-GCM) and signed (Ed25519).
+  The relay stores each sealed message until it is collected, then deletes it. Undelivered messages are deleted
+  after 90 days (365 days for delete notices, so that long-offline drivers still receive them).
+- **Sees only routing data**: a random device id for the sender and the receiver, a timestamp and a message id.
+  It never sees names, addresses, locations, phone numbers, chat text or coupon details.
+- **Keeps a device record** per install: the device id, its public keys, its role (driver or customer), its
+  platform (Android or iOS), a push token (section 3), and when it was created and last seen.
+- **Pairs QR codes.** When a driver shows a QR code, the relay stores a token id, the driver's device id and a
+  hash of the code's secret, so that exactly one phone can claim it. Unclaimed tokens expire.
+- **Limits abuse.** For a few actions (such as registering a device) Cloudflare's rate limiter counts requests
+  per IP address or device in short-lived counters. IP addresses are not stored otherwise.
+  Cloudflare may keep short-lived request logs (time, path, status) for operating the service.
+
+#### How long the relay keeps things
+
+| Data on the relay | Kept for |
+|---|---|
+| A sealed message waiting for its recipient | until collected, at most **90 days** |
+| A delete notice (customer deleted their data) | until collected, at most **365 days** |
+| An unclaimed QR link token | about **1 day** |
+| A revoked driver–customer link record | **30 days** (so a moved or removed link resolves cleanly) |
+| Replay-protection records (request signatures already seen) | **10 minutes** |
+| Rate-limit counters | short-lived (minutes) |
+| Device record (device id, public keys, role, platform, push token, created / last seen) | until the app is reset or the customer deletes their data |
+
+### 3. Push notifications (Firebase Cloud Messaging)
+
+To tell your phone that a new message is waiting, the relay sends a **data-only** push through Google's
+Firebase Cloud Messaging (FCM, which uses Apple Push Notification service on iPhones). The push contains no
+content, only a "you have mail" signal. Your phone then fetches and decrypts the message itself and shows the
+notification. Google processes the push token and delivery metadata under its own terms. You can turn
+notifications off in the app or in the phone's settings.
+
+### 4. No phone verification
+
+The app does not verify phone numbers or email addresses and does not use Firebase Authentication. Firebase is used
+only for push notifications (section 3). Customers who want to move to a new phone use the optional backup
+(section 5).
+
+### 5. Optional backup in your own cloud account
+
+Drivers and customers can each turn on a backup. A driver's backup holds their delivery book (customers' delivery
+locations, notes, coupons, requests, schedules, chat). A customer's backup holds their links to drivers, requests,
+coupons, deliveries, chat, name and consent record. Both also hold what the app needs to restore them on a new phone
+(the identity keys), so a customer's links to their drivers keep working after a restore. It is optional and off
+until the user turns it on. The backup is stored in **the user's own cloud account: a hidden app folder in their
+Google Drive on Android, or their iCloud on iPhone. It is never sent to or stored on DoorBook's servers.**
+
+The backup is protected by the user's Google or Apple account and by that provider's encryption at rest. It is
+**not end-to-end encrypted by DoorBook**: Google or Apple, under their own terms, and anyone with access to the user's
+account could read it. Google Drive access uses the narrow `drive.appdata` permission, which lets the app see only its
+own hidden folder, not the user's other files. Users can delete the backup at any time from the app, from Google
+Drive (Manage apps) or from iCloud settings. "Delete all my data", "Withdraw consent" and "Reset app" offer to delete
+the backup as well (on by default); if the cloud can't be reached, the app says so and the user can remove it in
+their cloud settings. When a customer deletes their data, the driver's app removes them from the delivery book, and
+the driver's next backup no longer contains them.
+
+### 6. Maps
+
+On Android and iPhone the app shows maps with the Google Maps SDK. Google receives the map area being viewed,
+the device's approximate location (for example from its IP address) and standard device information to deliver
+map tiles, under Google's privacy policy. This is the only location data that leaves the phone other than
+end-to-end encrypted delivery pins. The app does not send
+customer details to Google. Turn-by-turn navigation opens Google Maps or Waze, if you choose to, with the
+destination coordinates. The app uses your location only while it is open (to place a customer's pin, show your
+position and plan a route); it never tracks location in the background.
+
+### 7. Camera
+
+The camera is used only to scan a driver's QR code. Images are not stored or sent.
+
+### 8. Consent and your choices
+
+When a customer scans a driver's QR code, the app shows one consent screen explaining what is stored. Nothing is
+stored or linked unless the customer agrees. The consent record (date and text version) is kept on the
+customer's phone and with each linked driver.
+
+- **Name sharing** is off by default and can be turned on or off per driver.
+- **Withdraw consent** or **Delete all my data** (Profile → Privacy) erases the customer's data from their phone
+  and sends a delete notice to every linked driver. **Each driver's app then deletes its copy of that customer**
+  (location, requests, coupons, chat) the next time it connects, without keeping any stub. The relay deletes the
+  customer's device record, waiting messages and QR claims. The app also offers to delete the customer's backup from
+  their Google Drive or iCloud (section 5). If unused coupons remain, the app warns first; deleted coupons cannot be
+  restored.
+- A driver can also remove a customer; the customer's app is told and keeps only its own history.
+
+**Drivers** can back up their own delivery book to their own Google Drive or iCloud (section 5). There is no other
+export of customer data. Drivers can reset the app (Settings), which deletes their delivery book from the phone and
+their records from the relay, and offers to delete their backup too.
+
+### 9. What we do not do
+
+- No advertising, no analytics or crash-reporting SDKs, no tracking across apps or websites.
+- We do not sell, rent or share personal data, and we do not use it to profile anyone.
+- No payments are processed in the app.
+
+### 10. Legal basis and UAE PDPL
+
+We process personal data under the UAE Personal Data Protection Law (Federal Decree-Law No. 45 of 2021). For
+customers the basis is consent, given on the consent screen and withdrawable at any time. For drivers it is the
+use of the app they chose to install. Data sent through the relay and Google or Apple services (including a user's own
+backup) may be processed outside the UAE by those providers (Cloudflare, Google, Apple), with the safeguards in their terms. You have the right to access,
+correct and delete your data and to withdraw consent; most of this you can do directly in the app, and for anything
+else please contact us.
+
+### 11. Children
+
+DoorBook is not directed at children under 18.
+
+### 12. Changes
+
+If this policy changes, we will update the effective date and, for material changes, show a notice in the app
+(and ask customers for consent again where the law requires it).
+
+### 13. Contact
+
+Questions or requests: **contact@knoje.com**
 
 ---
 
