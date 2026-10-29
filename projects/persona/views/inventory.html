@@ -1,0 +1,79 @@
+<div ng-hide="1">{{SharedFactory.crrentTabIndex}}</div> 
+
+<h2 ng-hide="1">Inventory</h2>
+
+<div flex layout-fill>
+    <form name="FormUnits" class="form-inline" ng-submit="showCase.addinv()">
+		<div layout="row" layout-sm="column" layout-align="space-between" >
+			<md-input-container>
+				<label>Code</label>
+				<input ng-model="showCase.inv2Add.code" name="code" required>
+			</md-input-container>
+            <md-input-container>
+				<label>Name</label>
+				<input ng-model="showCase.inv2Add.name" name="name" required>
+			</md-input-container>
+            <md-input-container>
+				<label>LED</label>
+				<input ng-model="showCase.inv2Add.led" name="led" required>
+			</md-input-container>
+            <md-input-container>
+				<label>LP</label>
+				<input ng-model="showCase.inv2Add.lp" name="lp" required>
+			</md-input-container>
+            <md-input-container>
+				<label>AU</label>
+				<input ng-model="showCase.inv2Add.au" name="au" required>
+			</md-input-container>
+            <md-input-container>
+          		<label>HEAD</label>
+          		<md-select ng-model="showCase.inv2Add.head" name="head" required>
+            		<md-option ng-repeat="head in SharedFactory.heads" ng-value="head.value">
+              		{{head.display}}
+            		</md-option>
+          		</md-select>
+        	</md-input-container>
+            <md-input-container>
+				<label>Qty</label>
+				<input ng-model="showCase.inv2Add.qty" name="qty" required>
+			</md-input-container>
+            <md-input-container>
+				<md-button type="submit" class="md-raised md-primary" ng-disabled="FormUnits.$invalid" aria-label="Add Item">
+         			<md-icon md-svg-src="assets/svg/ic_add_circle_outline_white_48px.svg" style="color: white;"></md-icon> Add
+        		</md-button>
+			</md-input-container>
+            
+		</div>
+        <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="row-border hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>LED</th>
+                <th>LP</th>
+                <th>AU</th>
+                <th>HEAD</th>
+                <th>Qty</th>
+                <th ng-hide="auth.role!='ADMIN'">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="inv in showCase.invs">
+                <td>{{ $index+1 }}</td>
+                <td>{{ inv.code }}</td>
+                <td>{{ inv.name }}</td>
+                <td>{{ inv.led }}</td>
+                <td>{{ inv.lp }}</td>
+                <td>{{ inv.au }}</td>
+                <td>{{ inv.head }}</td>
+                <td>{{ inv.qty }}</td>
+                <td ng-hide="auth.role!='ADMIN'">
+                	<button type="button" ng-click="showCase.toggleRight($index,inv)" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-edit"></i></button>
+                    <button type="button" ng-click="showCase.removeinv($index,inv)" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

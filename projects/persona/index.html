@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Persona App</title>
+    <link rel="stylesheet" href="css/angular-material.min.css">
+    <link rel="stylesheet" href="css/angular-datatables.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="app.css">
+    
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/angular-route.min.js"></script>
+    <script type="text/javascript" src="js/angular.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/angular-animate.min.js"></script>
+    <script type="text/javascript" src="js/angular-resource.min.js"></script>
+    <script type="text/javascript" src="js/angular-aria.min.js"></script>
+    <script type="text/javascript" src="js/angular-material.min.js"></script>
+    <script type="text/javascript" src="js/moment.min.js"></script>
+        
+  </head>
+  <body ng-app="IMSApp" ng-controller="AppController" layout="column">
+	
+	<data-ng-include src="'head.html'"></data-ng-include>
+
+	<div flex layout="column">
+
+        <data-ng-include src="'sidenavleft.html'"></data-ng-include>
+        
+        <!-- data-ng-include src="'subheader.html'" ng-if="SharedFactory.subtoolbar()"></data-ng-include -->
+          	
+		<md-content flex layout="column" id="content" ng-view>
+    		
+     	</md-content>
+     	
+    </div>
+		<data-ng-include src="'sidenavright.html'"></data-ng-include>
+  </body>
+  <script src="app.js"></script>
+</html>

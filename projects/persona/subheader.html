@@ -1,0 +1,5 @@
+<md-subheader class="md-accent">
+	<md-tabs md-selected="SharedFactory.crrentTabIndex" flex md-border-bottom>
+    <md-tab class="md-padding" ng-repeat="tab in SharedFactory.tabs | orderBy:predicate:reversed" label="{{tab.title}}" ng-click="toggleTab($index)"></md-tab>
+	</md-tabs> 
+</md-subheader>

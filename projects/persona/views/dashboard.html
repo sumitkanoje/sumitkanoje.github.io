@@ -1,0 +1,110 @@
+<script src="js/d3/d3.v3.min.js"></script>
+<script src="js/d3/d3.layout.cloud.js"></script>
+<script src="js/d3/cloud.js"></script>
+
+<link rel="stylesheet" type="text/css"
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,600">
+    <link rel="stylesheet" type="text/css" href="sequences.css"/>
+
+<div flex layout-fill>
+    <form name="FormUsers" ng-submit="Ctrl.submit()">
+		
+		<div layout="row" layout-align="end center" flex>
+		 <md-input-container>
+				<md-button type="submit" class="md-raised md-primary" aria-label="Add Item">
+         			 Social Integration >>
+				</md-button>
+		</md-input-container>
+		 
+		</div>
+		
+		
+		<div layout="column" layout-align="space-around none">
+		
+		<div layout="row" class="border-box" layout-align="space-around none">
+		<div layout="column" layout-sm="column" flex="60" layout-align="center center" >
+			<md-input-container>
+				<label>Name</label>
+				<input ng-model="Ctrl.name" name="name" required>
+			</md-input-container>
+            <md-input-container>
+				<label>Address</label>
+				<input ng-model="Ctrl.address" name="address" required>
+			</md-input-container>
+            <md-input-container>
+				<label>Organization</label>
+				<input ng-model="Ctrl.org" name="organization" required>
+			</md-input-container>
+                        
+		</div>
+		<div flex="30">
+		<img src="images/person-icon.png"></img>
+		</div>
+		
+		</div>
+		
+		<div layout="row"  layout-align="space-between center">
+		
+		<div layout="column" layout-sm="column" flex="70" layout-align="center center" class="border-box">
+			Likes/Interest
+			<div class="interests"></div>
+		</div>
+		<div layout="column" flex="50" class="border-box" layout-align="center center">
+		Groups Subscribed to
+		<img src="images/groups.jpg" height="512" width="260"></img>
+		</div>
+		
+		</div>
+		
+		<div layout="row"  layout-align="space-around center">
+		
+		<div layout="column" flex="70" layout-align="center none" class="border-box">
+			<div flex layout-align="center center"><h4>Personality Insights</h4></div>
+			
+			<div layout="row" layout-align="space-around center" class="insights">
+			  <div id="main">
+      <div id="sequence"></div>
+      <div id="chart">
+        <div id="explanation" style="visibility: hidden;">
+          <span id="percentage"></span><br/>
+          of visits begin with this sequence of pages
+        </div>
+      </div>
+    </div>
+    <div id="sidebar">
+      <input type="checkbox" id="togglelegend"> Legend<br/>
+      <div id="legend" style="visibility: hidden;"></div>
+    </div>
+    <script type="text/javascript" src="js/d3/sequences.js"></script>
+    <script type="text/javascript">
+      // Hack to make this example display correctly in an iframe on bl.ocks.org
+      d3.select(self.frameElement).style("height", "700px");
+  </script> 
+			</div>
+			<div layout="row" layout-align="space-around center">
+			  <div flex="10">Tradition </div>
+			  <div flex>
+			  <md-progress-linear md-mode="determinate" value="{{ 15+20 }}"></md-progress-linear>
+			  <md-progress-linear class="md-warn" md-mode="determinate" value="{{ 11+40 }}"></md-progress-linear>
+			  </div>
+			</div>
+			
+			<div flex>
+			<p>&emsp;You are emotionally aware: you are aware of your feelings and how to express them. You are empathetic: you feel what others feel and are compassionate towards them. And you are altruistic: you feel fulfilled when helping others, and will go out of your way to do so.</p>
+             </div>           
+		</div>
+		
+		<div layout="column" flex="30" layout-align="center center" class="border-box" >
+		Match
+		<img src="images/person-icon.png" height="250" width="250"></img>
+		</div>
+		
+		</div>
+		
+		</div>
+		
+		
+			</md-input-container>
+       
+    </form>
+</div>

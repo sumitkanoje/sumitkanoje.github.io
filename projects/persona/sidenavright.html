@@ -1,0 +1,118 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right">
+	<md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools">Edit {{SharedFactory.currentTab.title}}</h1>
+    </md-toolbar>
+      
+    <md-content ng-controller="UserController as ctrl" layout-padding flex>
+    	<form name="FormEditUser" layout="column">
+          <md-input-container>
+            <label>Username</label>
+            <input type="text" ng-model="SharedFactory.selected.username" value="{{SharedFactory.selected.username}}" md-autofocus required>
+          </md-input-container>
+          <md-input-container>
+            <label>Password</label>
+            <input type="password" ng-model="SharedFactory.selected.password" required>
+          </md-input-container>
+          <md-input-container>
+            <label>Role</label>
+            <md-select ng-model="SharedFactory.selected.role" name="role" required>
+            	<md-option><em>None</em></md-option>
+            	<md-option ng-repeat="role in ctrl.roles" ng-value="role.value" ng-selected="$index == 1">
+            	{{role.display}}
+            	</md-option>
+          	</md-select>
+          </md-input-container>
+          <md-input-container>
+            <label>Owner</label>
+            <input type="text" ng-model="SharedFactory.selected.owner" name="owner" value="{{SharedFactory.selected.owner}}" required>
+          </md-input-container>
+        </form>
+		
+        <md-button ng-click="SharedFactory.toggleRight()" class="md-primary">
+          Close
+        </md-button>
+        <md-button ng-click="ctrl.modifyuser(SharedFactory.selected)" ng-disabled="FormEditUser.$invalid" class="md-raised md-primary">
+          Save
+        </md-button>
+    </md-content>
+</md-sidenav>
+
+<md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="units">
+	<md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools">Edit {{SharedFactory.currentTab.title}}</h1>
+    </md-toolbar>
+      
+    <md-content ng-controller="UnitController as ctrl" layout-padding flex>
+    	<form name="FormEditUnit" layout="column">
+          <md-input-container>
+            <label>Unit Code</label>
+            <input type="text" ng-model="SharedFactory.selected.code" value="{{SharedFactory.selected.code}}" md-autofocus required>
+          </md-input-container>
+          <md-input-container>
+            <label>Unit Name</label>
+            <input type="text" ng-model="SharedFactory.selected.name" value="{{SharedFactory.selected.name}}" required>
+          </md-input-container>
+          <md-input-container>
+            <label>Unit Station</label>
+            <input type="text" ng-model="SharedFactory.selected.station" name="owner" value="{{SharedFactory.selected.station}}" required>
+          </md-input-container>
+        </form>
+		
+        <md-button ng-click="ctrl.toggleRight()" class="md-primary">
+          Close
+        </md-button>
+        <md-button ng-click="ctrl.modifyuser(SharedFactory.selected)" ng-disabled="FormEditUnit.$invalid" class="md-raised md-primary">
+          Save
+        </md-button>
+    </md-content>
+</md-sidenav>
+
+<md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="invs">
+	<md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools">Edit {{SharedFactory.currentTab.title}}</h1>
+    </md-toolbar>
+      
+    <md-content ng-controller="InventoryController as ctrl" layout-padding flex>
+    	<form name="FormEditInv" layout="column">
+          <md-input-container>
+				<label>Code</label>
+				<input ng-model="SharedFactory.selected.code" name="code" required>
+			</md-input-container>
+            <md-input-container>
+				<label>Name</label>
+				<input ng-model="SharedFactory.selected.name" name="name" required>
+			</md-input-container>
+            <md-input-container>
+				<label>LED</label>
+				<input ng-model="SharedFactory.selected.led" name="led" required>
+			</md-input-container>
+            <md-input-container>
+				<label>LP</label>
+				<input ng-model="SharedFactory.selected.lp" name="lp" required>
+			</md-input-container>
+            <md-input-container>
+				<label>AU</label>
+				<input ng-model="SharedFactory.selected.au" name="au" required>
+			</md-input-container>
+            <md-input-container>
+          		<label>HEAD</label>
+          		<md-select ng-model="SharedFactory.selected.head" name="head" required>
+            		<md-option ng-repeat="head in SharedFactory.heads" ng-value="head.value">
+              		{{head.display}}
+            		</md-option>
+          		</md-select>
+        	</md-input-container>
+            <md-input-container>
+				<label>Qty</label>
+				<input ng-model="SharedFactory.selected.qty" name="qty" required>
+			</md-input-container>
+        </form>
+		
+        <md-button ng-click="ctrl.toggleRight()" class="md-primary">
+          Close
+        </md-button>
+        <md-button ng-click="ctrl.modifyinv(SharedFactory.selected)" ng-disabled="FormEditInv.$invalid" class="md-raised md-primary">
+          Save
+        </md-button>
+    </md-content>
+</md-sidenav>

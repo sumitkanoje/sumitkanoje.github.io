@@ -1,0 +1,12 @@
+<md-sidenav layout="column"  ng-click="SharedFactory.toggleLeft()" md-component-id="left" class="md-whiteframe-4dp" >
+          
+        <md-list>
+        	<md-list-item ng-repeat="it in SharedFactory.tabs">
+                <md-button ng-click="toggleTab($index)"  ng-class="{'selected' : it === SharedFactory.currentTab }">
+                  <md-icon md-svg-icon="{{it.icon}}" class="avatar"></md-icon>
+                  {{it.title}}
+                </md-button>
+            </md-list-item>
+        </md-list>
+        
+</md-sidenav>

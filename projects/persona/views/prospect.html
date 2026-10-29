@@ -1,0 +1,42 @@
+<div flex layout-fill >
+    
+	<form name="FormUsers" ng-submit="Ctrl.submit()">
+		<div layout="row">
+		<div flex="25"></div>
+		<div layout="column" flex="50" layout-align="center streach" >
+			<md-input-container flex="50">
+				<label>Blog Site 1</label>
+				<input ng-model="Ctrl.blog1" name="blog1" required>
+			</md-input-container>
+            <md-input-container>
+				<label>Blog Site 2</label>
+				<input ng-model="Ctrl.blog2" name="blog2" required>
+			</md-input-container>
+            <md-input-container>
+				<label>Blog Site 2</label>
+				<input ng-model="Ctrl.blog3" name="blog3" required>
+			</md-input-container>
+            <md-input-container>
+				<label>Facebook</label>
+				<input ng-model="Ctrl.facebook" name="facebook" required>
+			</md-input-container>
+            <md-input-container>
+				<label>Twitter</label>
+				<input ng-model="Ctrl.twitter" name="twitter" required>
+			</md-input-container>
+            <md-input-container>
+				<label>Linkedin</label>
+				<input ng-model="Ctrl.linkedin" name="linkedin" required>
+			</md-input-container>
+            <md-input-container>
+				<md-button type="submit" class="md-raised md-primary" aria-label="Add Item">
+         			</md-icon> Next >>
+        		</md-button>
+			</md-input-container>
+            
+		</div>
+		<div flex="25"></div>
+		</div>
+    </form>
+	
+</div>

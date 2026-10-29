@@ -1,0 +1,33 @@
+<div flex layout-fill>
+    <form name="FormUsers" ng-submit="Ctrl.submit()">
+		
+		<div layout="column" layout-align="space-between none">
+		
+		<div layout="row" class="border-box" layout-align="space-around none">
+		<h4>Word Art</h4>
+		
+		</div>
+		
+		<div layout="row" class="border-box" layout-align="space-around none">
+		<h4>Bank related Discussions</h4>
+		
+		</div>
+		
+		<div layout="row" class="border-box" layout-align="space-around none">
+		<h4>Emotions</h4>
+		
+		</div>
+		
+		<div layout="column" class="border-box" layout-align="space-around center">
+		<h4>Friends who liked KeyBank</h4><br>
+		<div flex layout="row">
+		<img ng-repeat="i in Ctrl.images" src="images/person-icon.png" height="200" width="200"></img>
+		
+		</div>
+		</div>
+			
+		
+		</div>
+       
+    </form>
+</div>

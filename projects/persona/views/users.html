@@ -1,0 +1,58 @@
+<div ng-hide="1">{{SharedFactory.crrentTabIndex}}</div> 
+
+<div flex layout-fill>
+    <form name="FormUsers" class="form-inline" ng-submit="showCase.adduser()">
+		<div layout="row" layout-sm="column" layout-align="space-between" >
+			<md-input-container>
+				<label>Username</label>
+				<input ng-model="showCase.user2Add.username" name="username" required>
+			</md-input-container>
+            <md-input-container>
+				<label>Password</label>
+				<input ng-model="showCase.user2Add.password" name="password" required>
+			</md-input-container>
+            <md-input-container>
+          		<label>Role</label>
+          		<md-select ng-model="showCase.user2Add.role" name="role" required>
+            		<md-option><em>None</em></md-option>
+            		<md-option ng-repeat="role in showCase.roles" ng-value="role.value">
+              		{{role.display}}
+            		</md-option>
+          		</md-select>
+        	</md-input-container>
+            <md-input-container>
+				<label>Owner</label>
+				<input ng-model="showCase.user2Add.owner" name="owner" required>
+			</md-input-container>
+            <md-input-container>
+				<md-button type="submit" class="md-raised md-primary" ng-disabled="FormUsers.$invalid" aria-label="Add Item">
+         			<md-icon md-svg-src="assets/svg/ic_add_circle_outline_white_48px.svg" style="color: white;"></md-icon> Add
+        		</md-button>
+			</md-input-container>
+            
+		</div>
+        <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="row-border hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Owner</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in showCase.users">
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.role }}</td>
+                <td>{{ user.owner }}</td>
+                <td>
+                    <button type="button" ng-click="showCase.toggleRight($index,user)" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-edit"></i></button>
+                    <button type="button" ng-click="showCase.removeuser($index,user)" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
